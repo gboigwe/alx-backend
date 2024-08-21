@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+""" Simple helper function """
+
+
 import csv
 import math
 from typing import List
@@ -29,7 +33,7 @@ class Server:
         Args:
             page (int, optional): The page number. Defaults to 1.
             page_size (int, optional): The page size. Defaults to 10.
-        
+
         Returns:
             List[List]: The requested page
         """
