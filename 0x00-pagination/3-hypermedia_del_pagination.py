@@ -45,25 +45,25 @@ class Server:
         Generate pagination information based on an index.
 
         Args:
-            index (int, optional): The starting index of the element. Defaults to None.
-            page_size (int, optional): The number of items per page. Defaults to 10.
+            index (int, optional): Starting index element. Defaults to None.
+            page_size (int, optional): The number of items. Defaults to 10.
 
         Returns:
             Dict: A dictionary containing pagination details.
         """
         assert isinstance(index, int) and isinstance(page_size, int)
         assert 0 <= index < len(self.dataset())
-        
+
         dataset = self.indexed_dataset()
         data = []
         next_index = index
-        
+
         for _ in range(page_size):
             while not dataset.get(next_index):
                 next_index += 1
             data.append(dataset.get(next_index))
             next_index += 1
-        
+
         return {
             'index': index,
             'next_index': next_index,
