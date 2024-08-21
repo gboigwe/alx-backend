@@ -42,14 +42,13 @@ class Server:
         begin, end = index_range(page, page_size)
         return self.dataset()[begin:end]
 
-
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """
         Generate pagination information.
 
         Args:
             page (int, optional): The current page number. Defaults to 1.
-            page_size (int, optional): The number of items per page. Defaults to 10.
+            page_size (int, optional): The number of items. Defaults to 10.
 
         Returns:
             Dict: A dictionary containing pagination details.
