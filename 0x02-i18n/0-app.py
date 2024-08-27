@@ -7,6 +7,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__, template_folder="templates")
 
+
 @app.route("/", methods=["GET"], strict_slashes=False)
 def hello_world() -> str:
     """Rendering the template for the flask"""
