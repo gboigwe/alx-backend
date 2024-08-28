@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
-"""Infer appropriate time zone"""
-
-
+""" Module for trying out Babel i18n """
+from datetime import datetime
+from flask_babel import Babel, _, format_datetime
 from flask import Flask, render_template, request, g
-from flask_babel import Babel, _
-from typing import Union
 import pytz
-
+from typing import Union
 
 app = Flask(__name__, template_folder='templates')
 babel = Babel(app)
 
 
 class Config(object):
-    """Language Class Configuration for Babel """
+    """ Configuration Class for Babel """
 
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
@@ -33,7 +31,7 @@ users = {
 def get_user() -> Union[dict, None]:
     """ Returns a user dictionary or
     None if the ID cannot be found or
-    if no user is logged in
+    if login_as was not passed.
     """
 
     try:
@@ -47,7 +45,7 @@ def get_user() -> Union[dict, None]:
 
 @app.before_request
 def before_request():
-    """Operations that can be performed before a request"""
+    """ Operations that happen before any request """
     user = get_user()
     g.user = user
 
@@ -55,7 +53,11 @@ def before_request():
 @app.route('/', methods=['GET'], strict_slashes=False)
 def hello_world() -> str:
     """Renders a Basic Template for Babel Implementation"""
-    return render_template("7-index.html")
+    timezone = get_timezone()
+    tz = pytz.timezone(timezone)
+    current_time = datetime.now(tz)
+    current_time = format_datetime(datetime=current_time)
+    return render_template("index.html", current_time=current_time)
 
 
 @babel.localeselector
