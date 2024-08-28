@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder='templates')
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
-def helloWorld() -> str:
+def hello_World() -> str:
     """Rendering the template for the flask"""
     return render_template('0-index.html')
 
